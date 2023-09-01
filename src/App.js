@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [list, setList] = useState([]);
+  const [input, setInput] = useState("");
+
+  const addTodo = (todo) => {
+    const newTodo = {
+      id: list.length + 1,
+      todo: todo,
+    };
+    console.log(list);
+
+    setList([...list, newTodo]); //eklemek için köşeli paratezi
+
+    setInput(""); //ekledikten sonra boş kalması için
+  };
+
+  const deleteTodo = (id) => {
+    const newList = list.filter((todo) => todo.id !== id);
+    setList(newList);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>To Do List</h1>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={() => addTodo(input)}>Add</button>
+
+      <ul>
+        {list.map((todo) => (
+          <li key={todo.id}>
+            {todo.todo}
+            <button onClick={() => deleteTodo(todo.id)}>&times;</button>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
