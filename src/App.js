@@ -14,7 +14,7 @@ function App() {
 
     setList([...list, newTodo]); //eklemek için köşeli paratezi
 
-    setInput(""); //ekledikten sonra boş kalması için
+    setInput(""); //ekledikten sonra boş kalması için burayı böyle yapıyoruz
   };
 
   const deleteTodo = (id) => {
